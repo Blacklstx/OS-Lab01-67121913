@@ -5,12 +5,14 @@ Student ID: 67121913
 ======================================================
 
 1. Hardware Baseline:
-- OS Version:
-- Number of CPU Cores:
-- Total RAM:
+- OS Version: Linux DESKTOP-P056V0A 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 GNU/Linux
+- Number of CPU Cores: 12 
+- Total RAM: 15.6
 
 2. Observation (from htop during stress test):
-[Write your answer here]
+During the CPU stress test, the Python script did not utilize all 12 available CPU cores. When observing htop, only 1 CPU core spiked to 100% utilization, while the other 11 cores remained almost entirely idle. This happens because standard Python executes on a single thread. Consequently, the OS scheduler can only assign this heavy mathematical workload to a single core, rather than distributing it across all available cores.
 
 3. Analysis:
-[Write your answer here]
+When training a Machine Learning model with a large dataset of 500,000 images, knowing the exact OS hardware limits is essential for two main reasons:  
+    Memory (RAM) Limits: Loading 500,000 images all at once will easily exceed the allocated 15GB of RAM. If this happens, the OS will run out of memory (OOM) and terminate the process. Knowing this limit forces us to write code that loads data in small batches.
+    CPU Core Counts: Image preprocessing (e.g., resizing, augmenting) requires significant CPU power. Knowing that the system has 12 cores allows us to write multi-processing code to divide the workload efficiently across all cores, preventing a single-core bottleneck and speeding up the training pipeline.
