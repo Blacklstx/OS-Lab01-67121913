@@ -1,7 +1,7 @@
 ======================================================
 COE67-XXX Operating Systems - Lab 01 Report
-Name: 
-Student ID: 
+Name: ณัฐสิทธิ ทินวงค์
+Student ID: 67121913 
 ======================================================
 
 1. Hardware Baseline:
